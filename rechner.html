@@ -1,0 +1,252 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Klimawandel</title>
+
+  </head>
+  <nav class="navbar sticky-top bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"></a>
+    </div>
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <a href="Klimawandel.html">
+            <img src="Logo2.png" alt="Logo der Website" height="50" width="90">  
+          </a>           
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="folgen.html">Folgen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ursachen.html">Ursachen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="maßnahmen.html">Maßnahmen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="rechner.html">Fußabdruckrechner</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="vergleich.html">Vergleich Österreich-Weltweit</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="kontakt.html">Kontakt</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</nav>
+
+  <body>
+    <div class="container custom-container">
+        <div class="container">
+          <h2>Jährlicher CO2-Fußabdruckrechner</h2>
+          <form action="#" method="post" id="co2Calculator">
+              <div class="form-group">
+                  <label for="carDistance">Autostrecke (in Meilen oder Kilometern):</label>
+                  <input type="number" class="form-control" id="carDistance" name="carDistance">
+              </div>
+              <div class="form-group">
+                  <label for="bikeDistance">Fahrradstrecke (in Meilen oder Kilometern):</label>
+                  <input type="number" class="form-control" id="bikeDistance" name="bikeDistance">
+              </div>
+              <div class="form-group">
+                  <label for="busDistance">Busstrecke (in Meilen oder Kilometern):</label>
+                  <input type="number" class="form-control" id="busDistance" name="busDistance">
+              </div>
+              <div class="form-group">
+                  <label for="wasteSeparated">Menge an getrenntem Abfall (in Kilogramm):</label>
+                  <input type="number" class="form-control" id="wasteSeparated" name="wasteSeparated">
+              </div>
+              <div class="form-group">
+                <label for="airTravel">Luftreisen (in Meilen oder Kilometern):</label>
+                <input type="number" class="form-control" id="airTravel" name="airTravel">
+            </div>
+            <div class="form-group">
+              <label for="householdEnergy">Energieverbrauch im Haushalt (in Kilowattstunden):</label>
+              <input type="number" class="form-control" id="householdEnergy" name="householdEnergy">
+            </div>
+            <div class="form-group">
+              <label for="meatConsumption">Fleischkonsum (in Kilogramm):</label>
+              <input type="number" class="form-control" id="meatConsumption" name="meatConsumption">
+            </div>
+              <div class="form-group">
+                  <label for="foodConsumption">Nahrungsmittelverbrauch (in Kilogramm CO2 pro Jahr):</label>
+                  <input type="number" class="form-control" id="foodConsumption" name="foodConsumption">
+              </div><br>
+              <button type="submit" class="btn btn-success">Berechnen</button>
+          </form>
+  
+          <div class="mt-4">
+              <h3>Ergebnis des jährlichen CO2-Fußabdrucks:</h3>
+              <p id="co2Result">Ihr geschätzter jährlicher CO2-Fußabdruck wird hier nach der Berechnung angezeigt.</p>
+              
+              <!-- Vorschläge zur Reduzierung des CO2-Fußabdrucks -->
+              <h3>Vorschläge zur Reduzierung Ihres CO2-Fußabdrucks:</h3>
+              <ul id="co2ReductionSuggestions">
+                  <!-- Vorschläge werden hier eingefügt -->
+              </ul>
+          </div>
+        </div>
+      </div>
+      <script>
+        document.getElementById('co2Calculator').addEventListener('submit', function (event) {
+            event.preventDefault();
+      
+            const carDistance = parseFloat(document.getElementById('carDistance').value) || 0;
+            const bikeDistance = parseFloat(document.getElementById('bikeDistance').value) || 0;
+            const busDistance = parseFloat(document.getElementById('busDistance').value) || 0;
+            const wasteSeparated = parseFloat(document.getElementById('wasteSeparated').value) || 0;
+            const foodConsumption = parseFloat(document.getElementById('foodConsumption').value) || 0;
+      
+            // CO2-Fußabdruck-Berechnung basierend auf den eingegebenen Daten
+            const carEmissions = carDistance * 0.2; // Passen Sie den Multiplikator an Ihre Daten an
+            const bikeEmissions = bikeDistance * 0.05; // Passen Sie den Multiplikator an Ihre Daten an
+            const busEmissions = busDistance * 0.1; // Passen Sie den Multiplikator an Ihre Daten an
+            const wasteEmissions = wasteSeparated * 0.1; // Passen Sie den Multiplikator an Ihre Daten an
+            const foodEmissions = foodConsumption; // Verbrauch von Lebensmitteln ist bereits in CO2-Emissionen
+      
+            const yearlyCO2Footprint = carEmissions + bikeEmissions + busEmissions + wasteEmissions + foodEmissions;
+      
+            document.getElementById('co2Result').textContent = `Ihr geschätzter jährlicher CO2-Fußabdruck beträgt ${yearlyCO2Footprint} kg CO2.`;
+      
+            // Generiere Vorschläge basierend auf dem CO2-Fußabdruck
+            const suggestions = generateSuggestions(yearlyCO2Footprint);
+      
+            // Zeige die Vorschläge auf der Seite an
+            const suggestionsList = document.getElementById('co2ReductionSuggestions');
+            suggestionsList.innerHTML = '';
+            suggestions.forEach(suggestion => {
+                const listItem = document.createElement('li');
+                listItem.textContent = suggestion;
+                suggestionsList.appendChild(listItem);
+            });
+        });
+      
+        // Funktion zur Generierung von Vorschlägen basierend auf dem CO2-Fußabdruck
+        function generateSuggestions(co2Footprint) {
+            const suggestions = [];
+      
+            if (co2Footprint > 1000) {
+                suggestions.push("Erwägen Sie, lange Autofahrten zu reduzieren und öffentliche Verkehrsmittel zu nutzen.");
+            }
+      
+            if (co2Footprint > 500) {
+                suggestions.push("Reduzieren Sie Ihre Abfallerzeugung und recyceln Sie mehr.");
+            }
+      
+            // Fügen Sie hier weitere Vorschläge basierend auf dem CO2-Fußabdruck hinzu.
+      
+            return suggestions;
+        }
+      </script>
+    <style type="text/sass">
+    </style>
+    <style>
+      .navbar.bg-body-tertiary{
+  background-color: #d4d6d8 !important;
+}
+.accordion-header{
+  color: #000000 !important; /* Ändern Sie dies in die gewünschte Textfarbe */
+            background-color: transparent !important; /* Ändern Sie dies, wenn Sie einen anderen Hintergrund wünschen */
+            border: 1px solid #000000 !important; /* Ändern Sie dies in die gewünschte Rahmenfarbe */
+            border-radius: 15px !important;
+            
+}
+.custom-container {
+            background-color: #d4d6d8 !important;
+            border: 2px solid #d4d6d8 !important;
+            border-radius: 10px !important;
+            padding: 20px !important;
+            margin-top: 20px !important;
+        }
+.accordion-button {
+            color: #000000 !important; /* Ändern Sie dies in die gewünschte Textfarbe */
+            background-color: transparent !important; /* Ändern Sie dies, wenn Sie einen anderen Hintergrund wünschen */
+            border: 1px solid #000000 !important; /* Ändern Sie dies in die gewünschte Rahmenfarbe */
+            border-radius: 15px !important;
+        }
+.accordion-body{
+  background-color: #d4d6d8 !important;
+  border-radius: 15px;
+}
+.nav-link:hover{
+  color: green !important;
+  font-weight: bold;
+  text-decoration: underline;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.ueberschrift-folgen{
+  text-align: center;
+  margin-top: 35px;
+  margin-bottom: 25px;
+  color: green;
+}
+.nav-link{
+  text-align: right;
+  margin-left: 100px;
+}
+.container-fluid {
+  text-align: right;
+}
+
+.centered-carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+        }
+
+#carouselExampleDark .carousel-inner img {
+            max-width: 300%;
+            display: block;
+        }
+
+.accordion{
+            margin-bottom: 50px;
+            margin-top: 40px;
+            margin-left: 70px;
+            margin-right: 70px;
+}
+
+.accordion-item{
+      margin-bottom: 50px;
+      margin-top: 40px;
+      margin-left: 70px;
+      margin-right: 70px;
+      background-color: gray;
+    }
+      .accordion-header{
+      border-color: black;
+    }
+    .accordion-flush{
+      border-color: black;
+    }
+</style>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<footer style="margin-top: 255px;">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="navbar-nav">
+            <li id="item">
+              <a class="nav-link" href="impressum.html">Impressum</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </footer>
+</html>

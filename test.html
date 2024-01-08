@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Überschreiben der blauen Farbe für den Akkordeon-Button */
+        .accordion-button {
+            color: #000000; /* Ändern Sie dies in die gewünschte Textfarbe */
+            background-color: transparent; /* Ändern Sie dies, wenn Sie einen anderen Hintergrund wünschen */
+            border: 1px solid #000000; /* Ändern Sie dies in die gewünschte Rahmenfarbe */
+        }
+    </style>
+</head>
+<body>
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Erhöhte Durchschnittstemperaturen
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Steigende Temperaturen auf der Erde sind eine der offensichtlichsten Folgen des Klimawandels.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
